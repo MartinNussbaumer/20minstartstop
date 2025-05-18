@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>20-Minuten Countdown mit Steuerung</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    #timer {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+    .controls {
+      display: flex;
+      gap: 10px;
+    }
+    button {
+      font-size: 16px;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="timer">20:00</div>
+  <div class="controls">
+    <button onclick="startTimer()">Start</button>
+    <button onclick="resetTimer()">Reset</button>
+  </div>
+  <script>
+    let totalSeconds = 20 * 60;
+    let intervalId = null;
+    const timerElement = document.getElementById("timer");
+
+    function updateTimerDisplay() {
+      const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+      const seconds = String(totalSeconds % 60).padStart(2, '0');
+      timerElement.textContent = minutes + ":" + seconds;
+    }
+
+    function startTimer() {
+      if (intervalId) return; // prevent multiple intervals
+      intervalId = setInterval(() => {
+        if (totalSeconds > 0) {
+          totalSeconds--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(intervalId);
+        }
+      }, 1000);
+    }
+
+    function resetTimer() {
+      clearInterval(intervalId);
+      intervalId = null;
+      totalSeconds = 20 * 60;
+      updateTimerDisplay();
+    }
+
+    updateTimerDisplay(); // initial display
+  </script>
+</body>
+</html>
