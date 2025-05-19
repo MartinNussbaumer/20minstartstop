@@ -27,6 +27,7 @@
     button {
       font-size: 16px;
       padding: 10px 20px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -48,7 +49,7 @@
     }
 
     function startTimer() {
-      if (intervalId) return; // prevent multiple intervals
+      if (intervalId) return;
       intervalId = setInterval(() => {
         if (totalSeconds > 0) {
           totalSeconds--;
@@ -66,7 +67,7 @@
       updateTimerDisplay();
     }
 
-    updateTimerDisplay(); // initial display
+    updateTimerDisplay();
   </script>
 </body>
 </html>
